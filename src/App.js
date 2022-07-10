@@ -1,12 +1,13 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
-// import Flotante from './components/Flotante';
+import Flotante from './components/Flotante';
 import Footer from './components/Footer';
 // import Home from './components/Home';
 import ItemDetailContainer from './components/ItemDetailContainer';
 import ItemListContainer from './components/ItemListContainer';
 import NavBar from './components/NavBar';
 // import NotFound from './components/NotFound';
+import {CartContextProvider} from './context/CartContext.jsx'
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
     //   </header>
     // </div>
 
-    <>
+    <><CartContextProvider>
       <NavBar />
       <Routes>
         <Route path="/" element={<ItemListContainer grettings={'HOME'} />}></Route>
@@ -39,8 +40,9 @@ function App() {
         {/* <ItemDetailContainer /> */}
       </Routes>
       {/* <ItemListContainer grettings={'hola'} /> */}
-      {/* <Flotante /> */}
+      <Flotante />
       <Footer />
+      </CartContextProvider>
     </>
   );
 }

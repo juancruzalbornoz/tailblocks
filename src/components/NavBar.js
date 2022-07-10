@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import CartWidget from './CartWidget'
+import useCartContext from '../context/CartContext'
 
 const NavBar = () => {
+    const {contextFunction} = useCartContext();
+    contextFunction();
+
     const [categories, setCategories] = useState([])
 
     const fetchCategories = () => {
