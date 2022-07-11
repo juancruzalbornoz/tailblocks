@@ -4,17 +4,20 @@ import ItemCount from './ItemCount'
 import useCartContext from '../context/CartContext';
 
 const ItemDetail = ({ item }) => {
-  const [isInCart, setIsInCart] = useState(false);
+  const {isInCart} = useCartContext();
+
+  const {contextFunction} = useCartContext();
+    contextFunction();
 
   const {addToCart} = useCartContext();
 
-  const onAdd = ( count ) => {
-    console.log(`PRODUCTOS AGREGADOS ${count} items`);
-    setIsInCart(true);
-    addToCart(item, count);
-    console.log("agregado al cart: ", item)
+//   const onAdd = ( count ) => {
+//     console.log(`PRODUCTOS AGREGADOS ${count} items`);
+//     setIsInCart(true);
+//     addToCart(item, count);
+//     console.log("agregado al cart: ", item, count)
 
-}
+// }
 
   return (
     <section class="text-gray-600 body-font overflow-hidden">
@@ -45,7 +48,7 @@ const ItemDetail = ({ item }) => {
                 </svg>
               </button>
             </div>
-            { isInCart? <button><CartWidget/></button> : <ItemCount stock={5} initial={1} onAdd={onAdd}/>}
+            { isInCart(item.id) ? <button><CartWidget/></button> : <ItemCount item={item} stock={5} initial={0} onAdd={addToCart}/>}
           </div>
           <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-contain object-center rounded" src={item.image} />
         </div>

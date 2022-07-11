@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { createContext } from 'react'
-import { useContext } from 'react';
+import { useState } from "react";
+import { createContext } from "react";
+import { useContext } from "react";
 
 const CartContext = createContext();
 const useCartContext = () => useContext(CartContext);
@@ -9,28 +9,80 @@ const { Provider } = CartContext;
 // guardar en el estado los items que agreguemoa al cart
 // ? 0_ Necesitamos un estado
 // ? 1_ agregar items al estado del carrito
-// * 2_ eliminar items del estado del carrito
-// 3_ limpiar el estado del carrito
-// 4_ obtener el estado del carrito
-// 5_ obtener el total del carrito
-// 6_ vcomporar si x item estan el carrito
+// ? 2_ eliminar items del estado del carrito
+// ? 3_ limpiar el estado del carrito
+// ? 4_ comprobar item Array.some()
+// * 5_ devolver la cantidad de items 
+// * 6_ devolver el costo 
 
-export function CartContextProvider({children}) {
-    const [cart, setCart] = useState([]);
+export function CartContextProvider({ children }) {
+  const [cart, setCart] = useState([]);
 
-    const addToCart = (item, cant) => {
-        const newItem = {...item, cant};
-        // const newCart = [...cart];
-        // newCart.push(newItem);
-        setCart([...cart, newItem])
+  const addToCart = (item, cant) => {
+    if (isInCart(item.id)) {
+      const newCart = cart.map(cartItem => {
+        if (cartItem.id === item.id) {
+          const copyItem = {...cartItem};
+          copyItem.cant += cant;
+          return copyItem;
+        } else {
+            return cartItem;
+        }
+      })
+      setCart(newCart);
+    } else {
+      const newItem = { ...item, cant };
+      // const newCart = [...cart];
+      // newCart.push(newItem);
+      setCart([...cart, newItem]);
     }
+  };
 
-    const contextFunction = () => console.log("contexto listo!")
+  const removeFromCart = (id) => {
+    const newCart = [...cart];
+    const cartFilter = newCart.filter((item) => {
+      return item.id !== id;
+    });
+    setCart(cartFilter);
+  };
 
-    return (
-        <Provider value={{contextFunction, cart, addToCart}}>{children}</Provider>
-    )
+  const clearCart = () => {
+    setCart([]);
+  };
+
+  const isInCart = (id) => {
+    return cart.some((item) => item.id === id);
+  }
+
+  const cantInCart = () => {
+    let total = 0;
+    cart.forEach(item => {
+        total = total + 1;
+    })
+    return total;
+    //for each NavBar
+  }
+
+//   const calcPriceCart = () => {
+//     //total de la cantidad multiplicada por el precio DESAFIO QUE VIENE
+//     const total = 0;
+//     return total;
+//   }
+
+  const contextFunction = () => console.log("contexto listo!");
+
+  return (
+    <Provider value={{ contextFunction, 
+                    cart, 
+                    addToCart, 
+                    removeFromCart, 
+                    clearCart,
+                    cantInCart,
+                    isInCart
+                    }}>
+      {children}
+    </Provider>
+  );
 }
-
 
 export default useCartContext;
