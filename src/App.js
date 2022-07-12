@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
+import CartView from './components/CartView';
 import Flotante from './components/Flotante';
 import Footer from './components/Footer';
 // import Home from './components/Home';
@@ -40,6 +41,7 @@ function App() {
         {/* <ItemDetailContainer /> */}
       </Routes>
       {/* <ItemListContainer grettings={'hola'} /> */}
+      <CartView />
       <Flotante />
       <Footer />
       </CartContextProvider>

@@ -12,8 +12,8 @@ const { Provider } = CartContext;
 // ? 2_ eliminar items del estado del carrito
 // ? 3_ limpiar el estado del carrito
 // ? 4_ comprobar item Array.some()
-// * 5_ devolver la cantidad de items 
-// * 6_ devolver el costo 
+// ? 5_ devolver la cantidad de items 
+// ? 6_ devolver el costo 
 
 export function CartContextProvider({ children }) {
   const [cart, setCart] = useState([]);
@@ -56,18 +56,23 @@ export function CartContextProvider({ children }) {
 
   const cantInCart = () => {
     let total = 0;
-    cart.forEach(item => {
-        total = total + 1;
-    })
+    cart.forEach((value, i) => {
+        total = i
+        console.log(total)
+      });
     return total;
     //for each NavBar
   }
 
-//   const calcPriceCart = () => {
-//     //total de la cantidad multiplicada por el precio DESAFIO QUE VIENE
-//     const total = 0;
-//     return total;
-//   }
+  const calcPriceCart = () => {
+    //total de la cantidad multiplicada por el precio DESAFIO QUE VIENE
+    let total = 0;
+    cart.forEach((value, i) => {
+        total = total + value.price * value.cant
+        console.log(total)
+      });
+    return total;
+  }
 
   const contextFunction = () => console.log("contexto listo!");
 
@@ -78,7 +83,8 @@ export function CartContextProvider({ children }) {
                     removeFromCart, 
                     clearCart,
                     cantInCart,
-                    isInCart
+                    isInCart,
+                    calcPriceCart
                     }}>
       {children}
     </Provider>
