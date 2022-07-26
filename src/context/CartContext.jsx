@@ -56,12 +56,10 @@ export function CartContextProvider({ children }) {
 
   const cantInCart = () => {
     let total = 0;
-    cart.forEach((value, i) => {
-        total = i
-        console.log(total)
-      });
+    cart.forEach(item => total = total + item.cant)
     return total;
     //for each NavBar
+    // cart.forEach(item => total = total + item.cant)
   }
 
   const calcPriceCart = () => {
@@ -71,7 +69,7 @@ export function CartContextProvider({ children }) {
         total = total + value.price * value.cant
         console.log(total)
       });
-    return total;
+    return total.toFixed(2);
   }
 
   const contextFunction = () => console.log("contexto listo!");

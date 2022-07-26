@@ -38,10 +38,10 @@ function App() {
         <Route path="/products/:prodId" element={<ItemDetailContainer />}></Route>
         {/* <Route path="/detalle" element={<ItemDetailContainer />}></Route> */}
         <Route path="*" element={<Navigate to="/" />}></Route>
+        <Route path="/cart" element={<CartView />}></Route>
         {/* <ItemDetailContainer /> */}
       </Routes>
       {/* <ItemListContainer grettings={'hola'} /> */}
-      <CartView />
       <Flotante />
       <Footer />
       </CartContextProvider>

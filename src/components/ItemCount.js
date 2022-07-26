@@ -53,7 +53,7 @@ function ItemCount({ item, stock, initial, onAdd }) {
                 <button onClick={sumar} class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">+</button>
                 <button onClick={resta} class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">-</button>
                 <button onClick={()=>removeFromCart(item.id)} class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">/</button>
-                <button onClick={()=> onAdd(item, num)} class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">{num > 0 ? `Agregar ${num} al ` : `Elegi tu cantidad`}</button>
+                <button onClick={()=> onAdd(num)} class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">{num > 0 ? `Agregar ${num} al ` : `Elegi tu cantidad`}</button>
 
             </div>
         </div>

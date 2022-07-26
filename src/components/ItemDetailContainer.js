@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 // import { listadoProductos } from '../data/asyncMock'
 import ItemDetail from './ItemDetail'
 import Loader from './Loader';
+import { getItem as fetchCard} from '../data';
 
 const ItemDetailContainer = () => {
 
@@ -26,22 +27,25 @@ const ItemDetailContainer = () => {
   //     console.log(product)
   // })
 
-  const params = useParams()
+  const {prodId} = useParams()
   const [product, setProduct] = useState({})
 
-  const fetchCard = () => {
-    fetch(`https://fakestoreapi.com/products/${params.prodId}`)
-      .then(res => res.json())
-      .then(json => {
-        setProduct(json)
-      })
-      .finally(() => setIsLoading(false))
-  }
+  // const fetchCard = () => {
+  //   fetch(`https://fakestoreapi.com/products/${params.prodId}`)
+  //     .then(res => res.json())
+  //     .then(json => {
+  //       setProduct(json)
+  //     })
+  //     .finally(() => setIsLoading(false))
+  // }
 
   useEffect(() => {
     setIsLoading(true)
-    fetchCard()
-  }, [params])
+    fetchCard(prodId).then( (respuestPromise) => {
+      setProduct(respuestPromise)
+    })
+    .finally(() => setIsLoading(false))
+  }, [prodId])
 
   return isLoading ? (
     <Loader /> 

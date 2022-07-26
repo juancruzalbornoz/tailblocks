@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import CartWidget from './CartWidget';
 import ItemCount from './ItemCount'
 import useCartContext from '../context/CartContext';
+import { Link } from 'react-router-dom';
+import Loader2 from './Loader2';
 
 const ItemDetail = ({ item }) => {
   const {isInCart} = useCartContext();
@@ -11,13 +13,14 @@ const ItemDetail = ({ item }) => {
 
   const {addToCart} = useCartContext();
 
-//   const onAdd = ( count ) => {
-//     console.log(`PRODUCTOS AGREGADOS ${count} items`);
-//     setIsInCart(true);
-//     addToCart(item, count);
-//     console.log("agregado al cart: ", item, count)
+  const onAdd = ( count ) => {
+    console.log(`PRODUCTOS AGREGADOS ${count} items`);
+    addToCart(item, count);
+}
 
-// }
+if (!item) {
+  return <Loader2 />
+}
 
   return (
     <section class="text-gray-600 body-font overflow-hidden">
@@ -48,7 +51,7 @@ const ItemDetail = ({ item }) => {
                 </svg>
               </button>
             </div>
-            { isInCart(item.id) ? <button><CartWidget/></button> : <ItemCount item={item} stock={5} initial={0} onAdd={addToCart}/>}
+            { isInCart(item.id) ? <Link to="/cart">Terminar mi compra<CartWidget/></Link> : <ItemCount item={item} stock={5} initial={0} onAdd={onAdd}/>}
           </div>
           <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-contain object-center rounded" src={item.image} />
         </div>
