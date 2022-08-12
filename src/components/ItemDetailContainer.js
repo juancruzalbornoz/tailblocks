@@ -8,36 +8,8 @@ import { getItem as fetchCard} from '../data';
 const ItemDetailContainer = () => {
 
   const [isLoading, setIsLoading] = useState(true);
-
-
-  // useEffect(() => {
-  //     console.log(listadoProductos)
-  //     const getItems = new Promise((resolve) => {
-  //         setTimeout(() => {
-  //             const myData = listadoProductos.find((item) => item[0].id ==='1');
-  //             resolve(myData)
-  //             console.log(myData)
-  //         }, 1000)
-  //     })
-
-  //     getItems.then((res) => {
-  //         setProduct(res)
-  //     })
-
-  //     console.log(product)
-  // })
-
   const {prodId} = useParams()
   const [product, setProduct] = useState({})
-
-  // const fetchCard = () => {
-  //   fetch(`https://fakestoreapi.com/products/${params.prodId}`)
-  //     .then(res => res.json())
-  //     .then(json => {
-  //       setProduct(json)
-  //     })
-  //     .finally(() => setIsLoading(false))
-  // }
 
   useEffect(() => {
     setIsLoading(true)

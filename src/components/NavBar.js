@@ -4,10 +4,8 @@ import CartWidget from './CartWidget'
 import useCartContext from '../context/CartContext'
 
 const NavBar = () => {
-    const {contextFunction} = useCartContext();
+    const { contextFunction } = useCartContext();
     contextFunction();
-
-    const {cantInCart} = useCartContext();
 
     const [categories, setCategories] = useState([])
 
@@ -36,12 +34,13 @@ const NavBar = () => {
                     <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
                         {categories.map(category => <NavLink key={category} style={{ padding: '1em' }} to={`/category/${category}`} class="mr-5 hover:text-gray-900">{category}</NavLink>)}
                     </nav>
-                    <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"><CartWidget />
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-                            <path d="M5 12h14M12 5l7 7-7 7"></path>
-                        </svg>
-                        {/* {cantInCart()} */}
-                    </button>
+                    <Link to={"/cart"}>
+                        <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"><CartWidget />
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                    </Link>
 
                 </div>
             </header>
